@@ -1,6 +1,6 @@
 var path = require('path');
 
-const HOST = '192.168.0.107';  
+const HOST = '172.18.28.82';  
 
 module.exports = {
     publicPath: process.env.NODE_ENV === 'production'
@@ -49,7 +49,7 @@ module.exports = {
         // host: '0.0.0.0',
         host: HOST,
         hot: true,
-        https: true,
+        https: false,
         hotOnly: true,
         headers: {
             'X-Requested-With': 'XMLHttpRequest'

@@ -1,29 +1,33 @@
 <template>
     <div class="member">
-        <el-table :data="manageData" style="width: 100%" height="100%">
+        <el-table :data="memberData" style="width: 92%; margin: 0 auto;" height="100%">
             <el-table-column label="序号" prop="id" width="60px"></el-table-column>
-            <el-table-column label="角色" prop="role">
-                <template slot-scope="scope">
-                    <span>{{ onFilter(scope.row.role) }}</span>
-                </template>
-            </el-table-column>
-            <el-table-column label="用户名" prop="user_name"></el-table-column>
+            <el-table-column label="昵称" prop="nick"></el-table-column>
+            <el-table-column label="用户名" prop="account"></el-table-column>
             <el-table-column label="头像">
                 <template slot-scope="scope">
-                    <img :src="scope.row.user_icon" alt="" />
+                    <template v-if="scope.row.icon">
+                        <img :src="scope.row.icon" alt="" />
+                    </template>
+                    <template v-else>
+                        <img src="@/assets/image/default_member.png" alt="" />
+                    </template>
                 </template>
             </el-table-column>
-            <el-table-column label="操作">
+            <el-table-column label="时间" prop="time"></el-table-column>
+            <!-- <el-table-column label="操作">
                 <template slot-scope="scope">
                     <el-button
                     size="mini"
-                    @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
+                    round
+                    @click="handleEdit(scope.$index, scope.row)">拉黑</el-button>
                     <el-button
                     size="mini"
                     type="danger"
+                    round
                     @click="handleDelete(scope.$index, scope.row)">删除</el-button>
                 </template>
-            </el-table-column>
+            </el-table-column> -->
         </el-table>
         <!--【删除对话框】-->
         <el-dialog title="警告" :visible.sync="dialogDel" top="30vh" :show-close="false" width="320px" custom-class="dialogDel" :before-close="handleClose">
@@ -89,7 +93,7 @@ export default {
     name: 'Member',
     data() {
         return {
-            manageData: [],
+            memberData: [],
             dialogDel: false,
             dialogEdit: false,
             form: {
@@ -106,10 +110,11 @@ export default {
     },
     created() {
         let that = this;
-        that.$axios.post('/api/manage', {}, {})
+        that.$axios.post('/api/member/list', {}, {})
         .then(function(res){
             console.log(res, 'res');
-            that.manageData = res.data;
+            that.memberData = res.data;
+            console.log(that.memberData, 'that.memberData');
         })
         .catch(function(err) {
             that.$toast(that, 'error', '网络错误～');

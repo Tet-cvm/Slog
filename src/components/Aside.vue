@@ -30,6 +30,10 @@
                 <i class="fa fa-users fa-lg"></i>
                 <span slot="title">Member</span>
             </el-menu-item>
+            <el-menu-item index="/dollar">
+                <i class="fa fa-users fa-lg"></i>
+                <span slot="title">Dollar</span>
+            </el-menu-item>
         </el-menu>
     </div>
 </template>

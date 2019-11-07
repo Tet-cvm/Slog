@@ -6,6 +6,7 @@ import Home from '@/components/Home.vue'
 import Movie from '@/components/Movie.vue'
 import Manage from '@/components/Manage.vue'
 import Member from '@/components/Member.vue'
+import Dollar from '@/components/Dollar.vue'
 
 Vue.use(Router)
 export default new Router({
@@ -40,6 +41,11 @@ export default new Router({
                     path: '/member',
                     name: 'member',
                     component: Member
+                },
+                {
+                    path: '/dollar',
+                    name: 'dollar',
+                    component: Dollar
                 }
             ]
         }
