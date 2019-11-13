@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/precache-manifest.9179f77bc8c2b7aa51a81f37a8304b1c.js"
+  "/precache-manifest.d192df889c7234ec2f6d137a1dcaf52b.js"
 );
 
 workbox.core.setCacheNameDetails({prefix: "tet"});

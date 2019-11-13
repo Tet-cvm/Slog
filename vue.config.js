@@ -2,30 +2,6 @@ var path = require('path');
 
 const HOST = '172.18.28.82';  
 
-const devProxy = ['/api'];  // 代理
-var proEnv = require('./config/pro.env');  // 生产环境
-var devEnv = require('./config/dev.env');  // 本地环境
-const env = process.env.NODE_ENV;
-let target = '';
-// 默认是本地环境
-if(env==='production'){  // 生产环境
-    target = proEnv.hosturl;
-}else{  // 本地环境
-    target = devEnv.hosturl;
-}
-// 生成代理配置对象
-let proxyObj = {};
-devProxy.forEach((value, index) => {
-    proxyObj[value] = {
-        target: target,
-        changeOrigin: true,
-        pathRewrite: {
-            [`^${value}`]: value
-        }
-    };
-});
-
-
 module.exports = {
     publicPath: process.env.NODE_ENV === 'production'
     ? '/'  //生产环境路径
@@ -87,19 +63,18 @@ module.exports = {
             // 'http://wind.slogger.cn/'
             // 'http://172.18.28.82:8080/'
         ],
-        proxy: proxyObj,
-        // proxy:{
-        //     '/api': {
-        //         target: 'http://49.233.202.163/',
-        //         // target: 'http://wind.slogger.cn/',
-        //         // target: 'http://172.18.28.82:8080/',
-        //         ws: true,
-        //         changeOrigin: true,
-        //         pathRewrite: {
-        //           '^/api' : ''
-        //         }
-        //       }
-        // }, //设置代理
-        // before: app=> {}
+        proxy:{
+            '/api': {
+                target: 'http://49.233.202.163/',
+                // target: 'http://wind.slogger.cn/',
+                // target: 'http://172.18.28.82:8080/',
+                ws: true,
+                changeOrigin: true,
+                pathRewrite: {
+                  '^/api' : ''
+                }
+              }
+        }, //设置代理
+        before: app=> {}
     }
 }
