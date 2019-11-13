@@ -67,7 +67,7 @@ export default {
 			
 			that.$refs[loginForm].validate((valid)=>{
 				if (valid) {
-					that.$axios.post('/api/login/login', that.$qs.stringify(that.loginForm), {})
+					that.$axios.post('/apilogin/login', that.$qs.stringify(that.loginForm), {})
 					.then(function(res) {
 						console.log(res, '/api/login/login');
 						if (res.data.status) {
