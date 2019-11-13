@@ -56,16 +56,16 @@ module.exports = {
         },
         contentBase: path.join(__dirname, 'dist'),
         compress: true,
-        port: 8080,
-        open: true,
+        port: 80,
+        open: false,
         allowedHosts: [
-            'http://49.233.202.163:80/'
+            'http://49.233.202.163/'
             // 'http://wind.slogger.cn/'
             // 'http://172.18.28.82:8080/'
         ],
         proxy:{
             '/api': {
-                target: 'http://49.233.202.163:80/',
+                target: 'http://49.233.202.163/',
                 // target: 'http://wind.slogger.cn/',
                 // target: 'http://172.18.28.82:8080/',
                 ws: true,
