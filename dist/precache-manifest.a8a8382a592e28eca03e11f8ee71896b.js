@@ -24,12 +24,12 @@ self.__precacheManifest = [
     "url": "/static/fonts/element-icons.732389de.ttf"
   },
   {
-    "revision": "fc607d85fdbeb374f508f05d3234df7a",
-    "url": "/static/img/password.fc607d85.png"
-  },
-  {
     "revision": "d6d70fba999f81cca902446e751dc4dc",
     "url": "/static/img/user.d6d70fba.png"
+  },
+  {
+    "revision": "fc607d85fdbeb374f508f05d3234df7a",
+    "url": "/static/img/password.fc607d85.png"
   },
   {
     "revision": "a3b8f344d6c15b41e87dd64a2be039c7",
@@ -44,12 +44,12 @@ self.__precacheManifest = [
     "url": "/static/fonts/fontawesome-webfont.fee66e71.woff"
   },
   {
-    "revision": "b06871f281fee6b241d60582ae9369b9",
-    "url": "/static/fonts/fontawesome-webfont.b06871f2.ttf"
-  },
-  {
     "revision": "674f50d287a8c48dc19ba404d20fe713",
     "url": "/static/fonts/fontawesome-webfont.674f50d2.eot"
+  },
+  {
+    "revision": "b06871f281fee6b241d60582ae9369b9",
+    "url": "/static/fonts/fontawesome-webfont.b06871f2.ttf"
   },
   {
     "revision": "912ec66d7572ff821749319396470bde",
