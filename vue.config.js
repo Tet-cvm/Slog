@@ -64,14 +64,14 @@ module.exports = {
             // 'http://172.18.28.82:8080/'
         ],
         proxy:{
-            '/api': {
+            '/api/': {
                 target: 'http://49.233.202.163/',
                 // target: 'http://wind.slogger.cn/',
                 // target: 'http://172.18.28.82:8080/',
                 ws: true,
                 changeOrigin: true,
                 pathRewrite: {
-                  '^/api' : ''
+                  '^/api' : '/'
                 }
               }
         }, //设置代理
