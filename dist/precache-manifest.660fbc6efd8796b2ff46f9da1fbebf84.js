@@ -24,12 +24,12 @@ self.__precacheManifest = [
     "url": "/static/fonts/element-icons.732389de.ttf"
   },
   {
-    "revision": "fc607d85fdbeb374f508f05d3234df7a",
-    "url": "/static/img/password.fc607d85.png"
-  },
-  {
     "revision": "d6d70fba999f81cca902446e751dc4dc",
     "url": "/static/img/user.d6d70fba.png"
+  },
+  {
+    "revision": "fc607d85fdbeb374f508f05d3234df7a",
+    "url": "/static/img/password.fc607d85.png"
   },
   {
     "revision": "a3b8f344d6c15b41e87dd64a2be039c7",
