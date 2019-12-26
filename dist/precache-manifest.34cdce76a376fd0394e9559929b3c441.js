@@ -24,12 +24,12 @@ self.__precacheManifest = [
     "url": "/static/fonts/element-icons.732389de.ttf"
   },
   {
-    "revision": "d6d70fba999f81cca902446e751dc4dc",
-    "url": "/static/img/user.d6d70fba.png"
-  },
-  {
     "revision": "fc607d85fdbeb374f508f05d3234df7a",
     "url": "/static/img/password.fc607d85.png"
+  },
+  {
+    "revision": "d6d70fba999f81cca902446e751dc4dc",
+    "url": "/static/img/user.d6d70fba.png"
   },
   {
     "revision": "a3b8f344d6c15b41e87dd64a2be039c7",
@@ -60,7 +60,11 @@ self.__precacheManifest = [
     "url": "/static/img/logo.8588584f.png"
   },
   {
-    "revision": "b87171e3b2edd540cd9f67ca2fb3103b",
+    "revision": "1dc8ed831745b286f77007be5e4b5bc1",
     "url": "/index.html"
+  },
+  {
+    "revision": "cfee69fa14fd50fdaf9d029b882bff2a",
+    "url": "/assets/logo.ico"
   }
 ];
