@@ -71,20 +71,6 @@ module.exports = {
                 }
               }
         }, //设置代理
-
-        // allowedHosts: [
-        //     process.env.NODE_ENV === 'production' ? 'http://49.233.202.163/' : 'http://wind.slogger.cn/'
-        // ],
-        // proxy:{
-        //     '/api': {
-        //         target: process.env.NODE_ENV === 'production' ? 'http://49.233.202.163/' : 'http://wind.slogger.cn/',
-        //         ws: true,
-        //         changeOrigin: true,
-        //         pathRewrite: {
-        //           '^/api' : ''
-        //         }
-        //       }
-        // }, //设置代理
         before: app=> {}
     }
 }

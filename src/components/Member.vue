@@ -84,7 +84,6 @@
                 </el-form-item>
             </el-form>
         </el-dialog>
-
     </div>
 </template>
 
@@ -149,7 +148,6 @@ export default {
         onSubmit() {
             console.log('submit!');
         }
-
     }
 }
 </script>

@@ -6,3 +6,189 @@ Group   => 用户管理
 
 
 //删除 node_moudles  然后 npm i 装回
+
+
+
+=======================================
+Login.vue
+登录接口:  /api/login/login
+          请求参数:
+          username   String  用户名
+          password   String  密码
+          返回值:
+          status     Boolean 状态
+          key        String  用户key
+          message    String  提示
+
+Movie.vue
+视频列表接口:  /api/movie/list
+          请求参数:
+          返回值:
+          id          Int  资源id
+          name        String  资源名称
+          poster      String  资源海报
+          img         String  资源图片
+          domains     String  资源地址
+          series      Array   资源类型
+          describe    String  资源描述
+          star        String  资源作者
+          score       String  资源评分
+          time        String  时间
+
+Movie.vue
+视频搜索接口:  /api/movie/search
+          请求参数:
+          search      String  关键字
+          返回值:
+          status        Boolean 状态
+          data.id       Int     资源id
+          data.name     String  资源名称
+          data.poster   String  资源海报
+          data.img      String  资源图片
+          data.domains  String  资源地址
+          data.series   Array   资源类型
+          data.describe String  资源描述
+          data.star     String  资源作者
+          data.score    String  资源评分
+          data.time     String  时间
+          message       String  提示
+
+Movie.vue
+类型搜索接口:  /api/movie/tag
+          请求参数:
+          tag           String  关键字
+          返回值:
+          status        Boolean 状态
+          data.id       Int     资源id
+          data.name     String  资源名称
+          data.poster   String  资源海报
+          data.img      String  资源图片
+          data.domains  String  资源地址
+          data.series   Array   资源类型
+          data.describe String  资源描述
+          data.star     String  资源作者
+          data.score    String  资源评分
+          data.time     String  时间
+          message       String  提示
+
+Movie.vue
+新增资源接口:  /api/movie/add
+          请求参数:
+          img           String  图片
+          imageUrl      String  图片路径
+          star          String  作者
+          score         String  评分
+          describe      String  描述
+          name          String  名称
+          series        Array   类别
+          domains       Array   地址
+          domains.value String  地址
+          返回值:
+          status        Boolean 状态
+          data.id       Int     资源id
+          data.name     String  资源名称
+          data.img      String  资源图片
+          data.domains  String  资源地址
+          data.series   Array   资源类型
+          data.describe String  资源描述
+          data.star     String  资源作者
+          data.score    String  资源评分
+          data.time     String  时间
+          message       String  提示
+
+Movie.vue
+资源编辑接口:   /api/movie/edit
+          请求参数:
+          id            Int     资源id
+          img           String  图片
+          imageUrl      String  图片路径
+          star          String  作者
+          score         String  评分
+          describe      String  描述
+          name          String  名称
+          series        Array   类别
+          domains       Array   地址
+          domains.value String  地址
+          返回值:
+          status        Boolean 状态
+          data.id       Int     资源id
+          data.name     String  资源名称
+          data.img      String  资源图片
+          data.domains  String  资源地址
+          data.series   Array   资源类型
+          data.describe String  资源描述
+          data.star     String  资源作者
+          data.score    String  资源评分
+          data.time     String  时间
+          message       String  提示
+
+Movie.vue
+资源删除接口:   /api/movie/del
+          请求参数:
+          id         Int     资源id
+          返回值:
+          status     Boolean 状态
+          message    String  提示
+
+Manage.vue
+管理员列表接口: /api/manage/list
+          请求参数:
+          返回值:
+          id         Int     管理员id
+          unionid    String  管理员唯一id
+          role       String  权限
+          name       String  昵称
+          time       String  时间
+          icon       String  头像(绝对地址)
+          img        String  头像
+
+Manage.vue
+新增管理员:  /api/manage/add
+          请求参数:
+          img       String  图片
+          imageUrl  String  图片地址
+          role      Int     权限
+          返回值:
+          id         Int     管理员id
+          unionid    String  管理员唯一id
+          role       String  权限
+          name       String  昵称
+          time       String  时间
+          icon       String  头像(绝对地址)
+          img        String  头像
+
+Manage.vue
+管理员编辑接口:  /api/manage/edit
+          请求参数:
+          unionid       String  管理员id
+          img           String  图片       
+          imageUrl      String  图片地址
+          role          Int     权限
+          name          String  名称
+          返回值:
+          status     Boolean 状态
+          id         Int     管理员id
+          unionid    String  管理员唯一id
+          role       String  权限
+          name       String  昵称
+          time       String  时间
+          icon       String  头像(绝对地址)
+          img        String  头像
+          message    String  提示
+
+Manage.vue
+管理员删除接口:   /api/manage/del
+          请求参数:
+          unionid       String  管理员id
+          返回值:
+          status        Boolean 状态
+          message       String  提示
+
+Member.vue
+会员列表接口:  /api/member/list
+          请求参数:
+          返回值:
+          id           Int      会员id
+          nick         String   昵称
+          account      String   账户
+          time         String   时间
