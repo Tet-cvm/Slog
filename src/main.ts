@@ -5,6 +5,7 @@ import Qs from 'qs';
 import {toast} from '@/assets/js/common.js';
 import {setCookie, getCookie, delCookie} from '@/assets/js/cookie.js'
 import ElementUI from 'element-ui';
+import echarts from 'echarts'
 import 'element-ui/lib/theme-chalk/index.css';
 import 'font-awesome/css/font-awesome.css'
 import '@/assets/css/flex.css'
@@ -21,6 +22,7 @@ Vue.prototype.$axios = axios;
 Vue.prototype.$qs = Qs;
 Vue.prototype.$toast = toast;
 
+Vue.prototype.$echarts = echarts
 Vue.prototype.$setCookie = setCookie;
 Vue.prototype.$getCookie = getCookie;
 Vue.prototype.$delCookie = delCookie;

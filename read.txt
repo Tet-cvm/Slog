@@ -20,6 +20,21 @@ Login.vue
           key        String  用户key
           message    String  提示
 
+Home.vue
+上报接口:  /api/report/compute
+          请求参数:
+          返回值:
+          status     Boolean 状态
+          home       Object  Home页面
+          player     Object  Player视频
+          active     Object  Active活动
+          user       Object  User我的
+          login      Object  Login登录
+          info       Object  Info用户信息
+          history    Object  History历史
+          collect    Object  Collect收藏
+          about      Object  About关于我们
+
 Movie.vue
 视频列表接口:  /api/movie/list
           请求参数:
