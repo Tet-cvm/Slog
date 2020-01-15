@@ -141,3 +141,19 @@
 .dialogDel .el-button+.el-button {
     margin: 0;
 }
+
+.upload-excel .el-upload-dragger {
+    width: 220px;
+    height: 94px;
+}
+.upload-excel .el-icon-upload {
+    margin: 6px 0 0 0;
+    font-size: 52px;
+}
+
+.upload-excel .el-upload__text {
+    font-size: 13px;
+}
+.upload-excel .el-upload__text em {
+    font-size: 13px;
+}

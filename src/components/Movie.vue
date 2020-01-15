@@ -2,19 +2,37 @@
     <div class="movie" ref="movie">
         <template>
             <div class="search" ref="search">
-                <el-input placeholder="请输入ID,名称,主演" v-model="search" class="input-with-select">
-                    <el-button slot="append" icon="el-icon-search" @click="onSearch()"></el-button>
-                </el-input>
-                <div class="tag-group">
-                    <el-tag
-                        v-for="(item, index) in items"
-                        :key="item.label"
-                        :type="item.type"
-                        effect="dark"
-                        @click="onTag(index)">
-                        {{ item.label }}
-                    </el-tag>
-                </div>
+                <el-row>
+                    <el-col :span="18">
+                        <el-input placeholder="请输入ID,名称,主演" v-model="search" class="input-with-select">
+                            <el-button slot="append" icon="el-icon-search" @click="onSearch()"></el-button>
+                        </el-input>
+                        <div class="tag-group">
+                            <el-tag
+                                v-for="(item, index) in items"
+                                :key="item.label"
+                                :type="item.type"
+                                effect="dark"
+                                @click="onTag(index)">
+                                {{ item.label }}
+                            </el-tag>
+                        </div>
+                    </el-col>
+                    <el-col :span="6">
+                        <el-upload
+                            class="upload-excel"
+                            drag
+                            action="/api/movie/xlsx"
+                            name="upload"
+                            :on-success="onXlsxWin"
+                            :on-error="onXlsxFail"
+                            :show-file-list="false"
+                            multiple>
+                            <i class="el-icon-upload"></i>
+                            <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
+                        </el-upload>
+                    </el-col>
+                </el-row>
             </div>
             <div class="container">
                 <template>
@@ -80,6 +98,24 @@
                             <i v-else class="el-icon-plus Avatar-uploader-icon"></i>
                             </el-upload>
                         </el-form-item>
+                        <el-form-item label="类别" prop="series">
+                            <el-checkbox-group v-model="addForm.series">
+                                <el-checkbox label="院线"></el-checkbox>
+                                <el-checkbox label="自制"></el-checkbox>
+                                <el-checkbox label="动作"></el-checkbox>
+                                <el-checkbox label="喜剧"></el-checkbox>
+                                <el-checkbox label="科幻"></el-checkbox>
+                                <el-checkbox label="犯罪"></el-checkbox>
+                                <el-checkbox label="爱情"></el-checkbox>
+                                <el-checkbox label="动画"></el-checkbox>
+                                <el-checkbox label="冒险"></el-checkbox>
+                            </el-checkbox-group>
+                        </el-form-item>
+                    </el-col>
+                    <el-col :span="12">
+                        <el-form-item label="名称" prop="name">
+                            <el-input type="text" placeholder="将夜" v-model="addForm.name"></el-input>
+                        </el-form-item>
                         <el-form-item label="主演" prop="star">
                             <el-input type="text" placeholder="李小龙;李香凝" v-model="addForm.star"></el-input>
                         </el-form-item>
@@ -90,33 +126,25 @@
                             <el-input type="textarea" :autosize="{ minRows: 5, maxRows: 12}" v-model="addForm.describe"></el-input>
                         </el-form-item>
                     </el-col>
-                    <el-col :span="12">
-                        <el-form-item label="名称" prop="name">
-                            <el-input type="text" placeholder="将夜" v-model="addForm.name"></el-input>
-                        </el-form-item>
-                        <el-form-item label="类别" prop="series">
-                            <el-checkbox-group v-model="addForm.series">
-                                <el-checkbox label="院线"></el-checkbox>
-                                <el-checkbox label="自制"></el-checkbox>
-                                <el-checkbox label="动作"></el-checkbox>
-                                <el-checkbox label="喜剧"></el-checkbox>
-                                <el-checkbox label="科幻"></el-checkbox>
-                                <el-checkbox label="犯罪"></el-checkbox>
-                                <el-checkbox label="爱情"></el-checkbox>
-                            </el-checkbox-group>
-                        </el-form-item>
+                    <el-col :span="22">
                         <el-form-item
                             v-for="(domain, index) in addForm.domains"
                             :label="'资源' + (index + 1)"
-                            :key="domain.key"
-                            :prop="'domains.' + index + '.value'"
-                            :rules="{
-                                required: true, message: '地址不能为空', trigger: 'blur'
-                            }"
+                            :key="index"
                             >
                             <el-row>
                                 <el-col :span="21">
-                                    <el-input v-model="domain.value"></el-input>
+                                    <el-row>
+                                        <el-col :span="5">
+                                            <el-input v-model="domain.key"></el-input>
+                                        </el-col>
+                                        <el-col :span="1">
+                                            <div style="text-align: center;">:</div>
+                                        </el-col>
+                                        <el-col :span="18">
+                                            <el-input v-model="domain.value"></el-input>
+                                        </el-col>
+                                    </el-row>
                                 </el-col>
                                 <el-col :span="3">
                                     <template v-if="index == 0">
@@ -128,10 +156,14 @@
                                 </el-col>
                             </el-row>
                         </el-form-item>
-                        <el-form-item>
-                            <el-button type="primary" @click="onAddSubmit('addForm')">立即创建</el-button>
-                            <el-button @click="dialogAdd = false">取消</el-button>
-                        </el-form-item>
+                    </el-col>
+                    <el-col :span="24">
+                        <div style="text-align: center;">
+                            <el-form-item>
+                                <el-button type="primary" @click="onAddSubmit('addForm')">立即创建</el-button>
+                                <el-button @click="dialogAdd = false">取消</el-button>
+                            </el-form-item>
+                        </div>
                     </el-col>
                 </el-row>
             </el-form>
@@ -155,6 +187,24 @@
                             <i v-else class="el-icon-plus Avatar-uploader-icon"></i>
                             </el-upload>
                         </el-form-item>
+                        <el-form-item label="类别" prop="series">
+                            <el-checkbox-group v-model="editForm.series">
+                                <el-checkbox label="院线"></el-checkbox>
+                                <el-checkbox label="自制"></el-checkbox>
+                                <el-checkbox label="动作"></el-checkbox>
+                                <el-checkbox label="喜剧"></el-checkbox>
+                                <el-checkbox label="科幻"></el-checkbox>
+                                <el-checkbox label="犯罪"></el-checkbox>
+                                <el-checkbox label="爱情"></el-checkbox>
+                                <el-checkbox label="动画"></el-checkbox>
+                                <el-checkbox label="冒险"></el-checkbox>
+                            </el-checkbox-group>
+                        </el-form-item>
+                    </el-col>
+                    <el-col :span="12">
+                        <el-form-item label="名称" prop="name">
+                            <el-input type="text" placeholder="将夜" v-model="editForm.name"></el-input>
+                        </el-form-item>
                         <el-form-item label="主演" prop="star">
                             <el-input type="text" placeholder="李小龙;李香凝" v-model="editForm.star"></el-input>
                         </el-form-item>
@@ -165,33 +215,25 @@
                             <el-input type="textarea" :autosize="{ minRows: 5, maxRows: 12}" v-model="editForm.describe"></el-input>
                         </el-form-item>
                     </el-col>
-                    <el-col :span="12">
-                        <el-form-item label="名称" prop="name">
-                            <el-input type="text" placeholder="将夜" v-model="editForm.name"></el-input>
-                        </el-form-item>
-                        <el-form-item label="类别" prop="series">
-                            <el-checkbox-group v-model="editForm.series">
-                                <el-checkbox label="院线"></el-checkbox>
-                                <el-checkbox label="自制"></el-checkbox>
-                                <el-checkbox label="动作"></el-checkbox>
-                                <el-checkbox label="喜剧"></el-checkbox>
-                                <el-checkbox label="科幻"></el-checkbox>
-                                <el-checkbox label="犯罪"></el-checkbox>
-                                <el-checkbox label="爱情"></el-checkbox>
-                            </el-checkbox-group>
-                        </el-form-item>
+                    <el-col :span="22">
                         <el-form-item
                             v-for="(domain, index) in editForm.domains"
                             :label="'资源' + (index + 1)"
-                            :key="domain.key"
-                            :prop="'domains.' + index + '.value'"
-                            :rules="{
-                                required: true, message: '地址不能为空', trigger: 'blur'
-                            }"
+                            :key="index"
                             >
                             <el-row>
                                 <el-col :span="21">
-                                    <el-input v-model="domain.value"></el-input>
+                                    <el-row>
+                                        <el-col :span="5">
+                                            <el-input v-model="domain.key"></el-input>
+                                        </el-col>
+                                        <el-col :span="1">
+                                            <div style="text-align: center;">:</div>
+                                        </el-col>
+                                        <el-col :span="18">
+                                            <el-input v-model="domain.value"></el-input>
+                                        </el-col>
+                                    </el-row>
                                 </el-col>
                                 <el-col :span="3">
                                     <template v-if="index == 0">
@@ -203,10 +245,14 @@
                                 </el-col>
                             </el-row>
                         </el-form-item>
-                        <el-form-item>
-                            <el-button type="primary" @click="onEditSubmit('editForm')">立即创建</el-button>
-                            <el-button @click="dialogEdit = false">取消</el-button>
-                        </el-form-item>
+                    </el-col>
+                    <el-col :span="24">
+                        <div style="text-align: center;">
+                            <el-form-item>
+                                <el-button type="primary" @click="onEditSubmit('editForm')">立即创建</el-button>
+                                <el-button @click="dialogEdit = false">取消</el-button>
+                            </el-form-item>
+                        </div>
                     </el-col>
                 </el-row>
             </el-form>
@@ -238,7 +284,7 @@ export default {
                 { type: 'warning', label: '喜剧' },
                 { type: 'danger', label: '科幻' },
                 { type: 'primary', label: '犯罪' },
-                { type: 'success', label: '爱情' }
+                { type: 'success', label: '爱情' },
             ],
             dialogAdd: false,
             addForm: {
@@ -249,7 +295,7 @@ export default {
                 describe: '',
                 name: '',
                 series: [],
-                domains: [{value: ''}],
+                domains: [{key: '', value: ''}],
             },
             addRules: {
                 star: [
@@ -283,7 +329,7 @@ export default {
                 describe: '',
                 name: '',
                 series: [],
-                domains: [{value: ''}],
+                domains: [{key: '', value: ''}],
             },
             editRules: {
                 star: [
@@ -315,25 +361,29 @@ export default {
     },
     created() {
         let that = this;
-        that.$axios.post('/api/movie/list', {}, {})
-        .then(function(res) {
-            console.log(res, '/api/movie/list');
-            if (res.data.length > 0) {
-                that.movieData = res.data;
-            } else {
-                that.dialogAdd = true;
-            }
-        })
-        .catch(function(err) {
-            that.$toast(that, 'error', '网络错误～');
-            that.loading = false;
-        })
+        that.onData();
     },
     mounted() {
         let that = this;
         that.tableHeight = that.$refs.movie.offsetHeight - that.$refs.search.offsetHeight - 80;
     },
     methods: {
+        onData() {
+            let that = this;
+            that.$axios.post('/api/movie/list', {}, {})
+            .then(function(res) {
+                console.log(res, '/api/movie/list');
+                if (res.data.length > 0) {
+                    that.movieData = res.data;
+                } else {
+                    that.dialogAdd = true;
+                }
+            })
+            .catch(function(err) {
+                that.$toast(that, 'error', '网络错误～');
+                that.loading = false;
+            })
+        },
         onSearch() {
             let that = this;
             if (that.search) {
@@ -400,22 +450,6 @@ export default {
 
 
         },
-        addDomain(status) {
-            status ? this.addForm.domains.push({value: '',key: Date.now()}) : this.editForm.domains.push({value: '',key: Date.now()});
-        },
-        removeDomain(item, status) {
-            if (status) {
-                var index = this.addForm.domains.indexOf(item)
-                if (index !== -1) {
-                    this.addForm.domains.splice(index, 1)
-                }
-            } else {
-                var index = this.editForm.domains.indexOf(item)
-                if (index !== -1) {
-                    this.editForm.domains.splice(index, 1)
-                }
-            }
-        },
         beforeAvatarUpload(file) {
             let that = this;
             const isJPG = file.type === 'image/jpeg' || file.type === 'image/png';
@@ -443,6 +477,22 @@ export default {
         },
         handleAdd(index, row) {
             this.dialogAdd = true;
+        },
+        addDomain(status) {
+            status ? this.addForm.domains.push({key: '', value: ''}) : this.editForm.domains.push({key: '', value: ''});
+        },
+        removeDomain(item, status) {
+            if (status) {
+                let index = this.addForm.domains.indexOf(item)
+                if (index !== -1) {
+                    this.addForm.domains.splice(index, 1)
+                }
+            } else {
+                let index = this.editForm.domains.indexOf(item)
+                if (index !== -1) {
+                    this.editForm.domains.splice(index, 1)
+                }
+            }
         },
         onAddSubmit(addForm) {
             let that = this;
@@ -480,10 +530,11 @@ export default {
             this.editForm.series = row.series;
             this.editForm.domains = row.domains;
             this.dialogEdit = true;
-            console.log(index, row);
+            console.log(index, row, 'handleEdit');
         },
         onEditSubmit(editForm) {
             let that = this;
+            console.log(that.editForm, 'editForm');
             that.$refs[editForm].validate((valid)=>{
                 if (valid) {
                     that.$axios.post('/api/movie/edit', that.$qs.stringify(that.editForm), {})
@@ -538,6 +589,19 @@ export default {
             .catch(function(err) {
                 that.$toast(that, 'error', '网络错误～');
             })
+        },
+        onXlsxWin: function(response, file, fileList) {
+            console.log(response, file, fileList, 'xlsx')
+            let that = this;
+            if (response.status) {
+                that.onData();
+            } else {
+                that.$toast(that, 'error', response.message);
+            }
+        },
+        onXlsxFail: function(err, file, fileList) {
+            this.$toast(this, 'error', err);
+            console.log(err, file, fileList, 'onXlsxFail')
         }
     }
 }
@@ -574,5 +638,4 @@ export default {
 .dialogEdit .el-col-3 {
     text-align: center;
 }
-
 </style>
